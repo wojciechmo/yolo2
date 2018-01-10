@@ -8,7 +8,7 @@
 2. Evaluate YOLOv2 model trained with COCO dataset. Conversion from Darknet to Tensorflow framework done with darkflow project.
 
 <img src="https://s14.postimg.org/zfqjg9jzl/image.png" width="500">
-<img src="https://s14.postimg.org/kwjeeubf5/image.png.png" width="300">
+<img src="https://s14.postimg.org/qne665vwh/image.png" width="300">
 
 
 
