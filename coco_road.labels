@@ -1,0 +1,8 @@
+0 person (255,50,0)
+1 bicycle (255,0,130)
+2 car (0,0,255)
+3 motorbike (0,100,255)
+5 bus (255,255,0)
+6 train (0,255,0)
+7 truck (0,255,255)
+9 traffic_light (255,0,255)
