@@ -1,9 +1,7 @@
 import os
 import tensorflow as tf
 import numpy as np
-import os
 import cv2
-import sys
 
 SCALE = 32
 GRID_W, GRID_H = 18, 10

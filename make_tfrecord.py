@@ -1,7 +1,7 @@
 import tensorflow as tf
-import cv2, sys
 import numpy as np
 import pandas as pd
+import cv2
 import csv
 
 csv_path = './data.csv'
