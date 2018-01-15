@@ -130,30 +130,39 @@ def yolo_loss(pred, label, lambda_coord, lambda_no_obj):
 	mask = slice_tensor(label, 5)
 	label = slice_tensor(label, 0, 4)
 	
-	mask = tf.cast(tf.reshape(mask, shape=(-1, GRID_H, GRID_W, N_ANCHORS)),tf.bool)	 
+	mask = tf.cast(tf.reshape(mask, shape=(-1, GRID_H, GRID_W, N_ANCHORS)),tf.bool)
+		 
+	with tf.name_scope('mask'):
+		masked_label = tf.boolean_mask(label, mask)
+		masked_pred = tf.boolean_mask(pred, mask)
+		neg_masked_pred = tf.boolean_mask(pred, tf.logical_not(mask))
 
-	masked_label = tf.boolean_mask(label, mask)
-	masked_pred = tf.boolean_mask(pred, mask)
-	neg_masked_pred = tf.boolean_mask(pred, tf.logical_not(mask))
-
-	masked_pred_xy = tf.sigmoid(slice_tensor(masked_pred, 0, 1))
-	masked_pred_wh = tf.exp(slice_tensor(masked_pred, 2, 3))
-	masked_pred_o = tf.sigmoid(slice_tensor(masked_pred, 4))
-	masked_pred_no_o = tf.sigmoid(slice_tensor(neg_masked_pred, 4))
-	masked_pred_c = tf.nn.softmax(slice_tensor(masked_pred, 5, -1))
-
-	masked_label_xy = slice_tensor(masked_label, 0, 1)
-	masked_label_wh = slice_tensor(masked_label, 2, 3)
-	masked_label_c = slice_tensor(masked_label, 4)
-	masked_label_c_vec = tf.reshape(tf.one_hot(tf.cast(masked_label_c, tf.int32), depth=N_CLASSES), shape=(-1, N_CLASSES))
-
-	loss_xy = tf.reduce_sum(tf.square(masked_pred_xy-masked_label_xy))
-	loss_wh = tf.reduce_sum(tf.square(masked_pred_wh-masked_label_wh))
-	loss_obj = tf.reduce_sum(tf.square(masked_pred_o - 1))
-	loss_no_obj = tf.reduce_sum(tf.square(masked_pred_no_o))
-	loss_c = tf.reduce_sum(tf.square(masked_pred_c - masked_label_c_vec))
+	with tf.name_scope('pred'):
+		masked_pred_xy = tf.sigmoid(slice_tensor(masked_pred, 0, 1))
+		masked_pred_wh = tf.exp(slice_tensor(masked_pred, 2, 3))
+		masked_pred_o = tf.sigmoid(slice_tensor(masked_pred, 4))
+		masked_pred_no_o = tf.sigmoid(slice_tensor(neg_masked_pred, 4))
+		masked_pred_c = tf.nn.softmax(slice_tensor(masked_pred, 5, -1))
+		
+	with tf.name_scope('lab'):
+		masked_label_xy = slice_tensor(masked_label, 0, 1)
+		masked_label_wh = slice_tensor(masked_label, 2, 3)
+		masked_label_c = slice_tensor(masked_label, 4)
+		masked_label_c_vec = tf.reshape(tf.one_hot(tf.cast(masked_label_c, tf.int32), depth=N_CLASSES), shape=(-1, N_CLASSES))
 	
-	loss = lambda_coord*(loss_xy + loss_wh) + loss_obj + lambda_no_obj*loss_no_obj + loss_c
+	with tf.name_scope('merge'):
+		with tf.name_scope('loss_xy'):
+			loss_xy = tf.reduce_sum(tf.square(masked_pred_xy-masked_label_xy))
+		with tf.name_scope('loss_wh'):	
+			loss_wh = tf.reduce_sum(tf.square(masked_pred_wh-masked_label_wh))
+		with tf.name_scope('loss_obj'):
+			loss_obj = tf.reduce_sum(tf.square(masked_pred_o - 1))
+		with tf.name_scope('loss_no_obj'):
+			loss_no_obj = tf.reduce_sum(tf.square(masked_pred_no_o))
+		with tf.name_scope('loss_class'):	
+			loss_c = tf.reduce_sum(tf.square(masked_pred_c - masked_label_c_vec))
+		
+		loss = lambda_coord*(loss_xy + loss_wh) + loss_obj + lambda_no_obj*loss_no_obj + loss_c
 	
 	return loss
 
