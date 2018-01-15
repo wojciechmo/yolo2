@@ -7,7 +7,8 @@
 <img src="https://s13.postimg.org/rci0unzjb/neta.png" width="400">
 <img src="https://s13.postimg.org/g05fcvyk7/netb.png" width="400">
 <img src="https://s13.postimg.org/el3uo6cwn/netc.png" width="400">
-<img src="https://s13.postimg.org/p596t3zrb/loss.png" width="550">
+<img src="https://s9.postimg.org/ossrlazcf/loss2.png" width="550">
+<img src="https://s9.postimg.org/dgg63jlin/merge.png" width="550">
 
 
 2. Evaluate YOLOv2 model trained with COCO dataset. Conversion from Darknet to Tensorflow framework done with darkflow project.
