@@ -1,7 +1,5 @@
 # You Only Look Once
 
-Joseph Redmon's, Ali Farhadi's paper: https://arxiv.org/pdf/1612.08242.pdf
-
 1.Train YOLOv2 object detector from scratch with Tensorflow.
 
 ## Usage
