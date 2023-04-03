@@ -1,6 +1,6 @@
 # You Only Look Once
 
-1.Train YOLOv2 object detector from scratch with Tensorflow.
+
 
 ## Usage
 Prepare two files: 
@@ -11,6 +11,8 @@ python make_tfrecord.py
 python train.py
 python eval.py
 ```
+
+1.Train YOLOv2 object detector from scratch with Tensorflow.
 
 2.Evaluate YOLOv2 model trained with COCO dataset using Tensorflow. Conversion from Darknet to Tensorflow framework done with darkflow project.
 
