@@ -12,12 +12,6 @@ python train.py
 python eval.py
 ```
 
-<img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/neta.png" width="400">
-<img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/netb.png" width="400">
-<img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/netc.png" width="400">
-<img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/loss2.png" width="300">
-<img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/merge.png" width="700">
-
 2.Evaluate YOLOv2 model trained with COCO dataset using Tensorflow. Conversion from Darknet to Tensorflow framework done with darkflow project.
 
 <img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/a2.png" width="400">
