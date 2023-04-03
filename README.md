@@ -2,20 +2,19 @@
 
 
 
-## Usage
-Prepare two files: 
-
+1. Prepare two files: 
 data.csv (three columns: filenames, rois, classes - each row contains image filepath, list of rois (each [x,y,w,h]), list of classes) and anchors.txt (each row contains width and height of one anchor).
 ```
 python make_tfrecord.py
+```
+2. Train YOLOv2 object detector from scratch with Tensorflow.
+```
 python train.py
+```
+3. Evaluate YOLOv2 model trained with COCO dataset using Tensorflow. Conversion from Darknet to Tensorflow framework done with darkflow project.
+```
 python eval.py
 ```
-
-1.Train YOLOv2 object detector from scratch with Tensorflow.
-
-2.Evaluate YOLOv2 model trained with COCO dataset using Tensorflow. Conversion from Darknet to Tensorflow framework done with darkflow project.
-
 <img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/a2.png" width="400">
 <img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/a4.png" width="290">
 <img src="https://github.com/WojciechMormul/yolo2/blob/master/imgs/r1.png" width="700">
